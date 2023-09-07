@@ -4,9 +4,11 @@ import { RequestPayload } from "../types"
 export async function updatePrice(ctx: Context, next: () => Promise<void>) {
 
   const {
+    vtex: { route: { params } },
     clients: { pricing }
   } = ctx
 
+  const { refId } = params
   const skuId = ctx.state.skuId
   const payload: RequestPayload = await json(ctx.req)
 
@@ -15,7 +17,7 @@ export async function updatePrice(ctx: Context, next: () => Promise<void>) {
     await pricing.createOrUpdateBasePriceOrFixedPrices(skuId, payload)
 
     ctx.status = 200
-    ctx.body = { name: "SUCCESS", message: `Price for SKU ${skuId} has been updated.` }
+    ctx.body = { name: "SUCCESS", message: `Price for SKU with RefId ${refId} has been updated.` }
   }
   catch (e) {
     const {
