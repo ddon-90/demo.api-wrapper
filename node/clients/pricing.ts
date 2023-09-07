@@ -1,10 +1,11 @@
 import type { InstanceOptions, IOContext } from '@vtex/api'
-import { JanusClient } from '@vtex/api'
+import { ExternalClient } from '@vtex/api'
 import { RequestPayload } from '../types'
 
-export default class Logistics extends JanusClient {
+export default class Pricing extends ExternalClient {
   constructor(context: IOContext, options?: InstanceOptions) {
     super(
+      `http://api.vtex.com/${context.account}/pricing`,
       context,
       {
         ...(options ?? {}),
@@ -19,9 +20,9 @@ export default class Logistics extends JanusClient {
     )
   }
 
-  public async updateInventoryBySkuAndWarehouse(skuId: string, warehouseId: string, payload: RequestPayload): Promise<any> {
-    return this.http.put(`api/logistics/pvt/inventory/skus/${skuId}/warehouses/${warehouseId}`, payload, {
-      metric: 'update-inventory-by-sku-and-warehouse',
+  public async createOrUpdateBasePriceOrFixedPrices(skuId: string, payload: RequestPayload): Promise<any> {
+    return this.http.put(`prices/${skuId}`, payload, {
+      metric: 'create-or-update-base-price-or-fixed-prices',
     })
   }
 }

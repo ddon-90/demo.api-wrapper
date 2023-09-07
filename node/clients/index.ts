@@ -2,7 +2,7 @@ import { IOClients } from '@vtex/api'
 
 import VtexId from './vtexId'
 import Catalog from './catalog'
-import Logistics from './logistics'
+import Pricing from './pricing'
 
 // Extend the default IOClients implementation with our own custom clients.
 export class Clients extends IOClients {
@@ -15,7 +15,7 @@ export class Clients extends IOClients {
     return this.getOrSet('catalog', Catalog)
   }
 
-  public get logistics() {
-    return this.getOrSet('logistics', Logistics)
+  public get pricing() {
+    return this.getOrSet('pricing', Pricing)
   }
 }

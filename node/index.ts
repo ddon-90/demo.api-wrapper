@@ -3,9 +3,8 @@ import { LRUCache, method, Service } from '@vtex/api'
 
 import { Clients } from './clients'
 import { auth } from './middlewares/auth'
-import { validate } from './middlewares/validate'
-import { updateInventory as updateInventoryMiddleware } from './middlewares/updateInventory'
-import { RequestPayload } from './types'
+import { getSkuId } from './middlewares/getSkuId'
+import { updatePrice } from './middlewares/updatePrice'
 
 const TIMEOUT_MS = 800
 
@@ -13,7 +12,7 @@ const TIMEOUT_MS = 800
 // The @vtex/api HttpClient respects Cache-Control headers and uses the provided cache.
 const memoryCache = new LRUCache<string, any>({ max: 5000 })
 
-metrics.trackCache('updateInventory', memoryCache)
+metrics.trackCache('updatePrice', memoryCache)
 
 // This is the configuration for clients available in `ctx.clients`.
 const clients: ClientsConfig<Clients> = {
@@ -38,7 +37,6 @@ declare global {
 
   interface State extends RecorderState {
     skuId: string
-    payload: RequestPayload
   }
 }
 
@@ -46,8 +44,8 @@ declare global {
 export default new Service({
   clients,
   routes: {
-    updateInventory: method({
-      PUT: [auth, validate, updateInventoryMiddleware],
+    updatePrice: method({
+      PUT: [auth, getSkuId, updatePrice],
     })
   },
 })

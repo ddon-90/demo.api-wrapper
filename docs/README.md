@@ -7,14 +7,14 @@ Example of new REST APIs built on top of VTEX IO.
 Exposed routes:
 ```
 "routes": {
-  "updateInventory": {
-    "path": "/_v/api/inventory/skus/:refId/warehouses/:warehouseId",
+  "updatePrice": {
+    "path": "/_v/api/pricing/prices/:refId",
     "public": true
   }
 }
 ```
 
-_Note: The behaviour of this API is the same as the [Update inventory by SKU and warehouse API](https://developers.vtex.com/docs/api-reference/logistics-api#put-/api/logistics/pvt/inventory/skus/-skuId-/warehouses/-warehouseId-) with the only difference that you need to use the SKU Reference ID instead of the SKU ID_
+_Note: The behaviour of this API is the same as the [Create or Update Base Price or Fixed Prices](https://developers.vtex.com/docs/api-reference/pricing-api#put-/pricing/prices/-itemId-?endpoint=put-/pricing/prices/-itemId-) with the only difference that you need to use the SKU Reference ID instead of the SKU ID_
 
 ## Proof points:
 - External API calls
@@ -40,7 +40,7 @@ vtex use {{workspace}}
 
 ```
 {
-  "name": "api-wrapper-example",
+  "name": "update-price-api-wrapper",
   "vendor": "{{account}}",
   "version": "0.0.1",
   "title": "API Example",
@@ -61,12 +61,25 @@ vtex link
 
 ```
 PUT
-https://{{workspace}}--{{account}}.myvtex.com/_v/api/inventory/skus/:refId/warehouses/:warehouseId
+https://{{workspace}}--{{account}}.myvtex.com/_v/api/pricing/prices/:refId
 
 Request Body:
 {
-  "unlimitedQuantity": false,
-  "dateUtcOnBalanceSystem": "null",
-  "quantity": 106
+  "markup": null,
+  "listPrice": 399,
+  "basePrice": 299,
+  "costPrice": 100,
+  "fixedPrices": [
+    {
+      "tradePolicyId": "1",
+      "value": 199,
+      "listPrice": 299,
+      "minQuantity": 1,
+      "dateRange": {
+        "from": "2023-09-07T00:00:00+01:00",
+        "to": "2023-09-09T23:59:59+01:00"
+      }
+    }
+  ]
 }
 ```

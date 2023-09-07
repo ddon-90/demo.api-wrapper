@@ -1,5 +1,5 @@
 {
-  "name": "api-wrapper-example",
+  "name": "update-price-api-wrapper",
   "vendor": "{{account}}",
   "version": "0.0.1",
   "title": "API Example",
@@ -31,7 +31,7 @@
       }
     },
     {
-      "name": "LogisticsAdmin"
+      "name": "modify_prices"
     },
     {
       "name": "colossus-fire-event"
