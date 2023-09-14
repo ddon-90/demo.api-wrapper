@@ -10,7 +10,7 @@ const TIMEOUT_MS = 30000
 
 // Create a LRU memory cache.
 // The @vtex/api HttpClient respects Cache-Control headers and uses the provided cache.
-const memoryCache = new LRUCache<string, any>({ max: 5000, tll: 100 })
+const memoryCache = new LRUCache<string, any>({ max: 10000 })
 
 metrics.trackCache('catalog', memoryCache)
 
