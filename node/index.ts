@@ -6,13 +6,13 @@ import { auth } from './middlewares/auth'
 import { getSkuId } from './middlewares/getSkuId'
 import { updatePrice } from './middlewares/updatePrice'
 
-const TIMEOUT_MS = 800
+const TIMEOUT_MS = 30000
 
 // Create a LRU memory cache.
 // The @vtex/api HttpClient respects Cache-Control headers and uses the provided cache.
-const memoryCache = new LRUCache<string, any>({ max: 5000 })
+const memoryCache = new LRUCache<string, any>({ max: 10000 })
 
-metrics.trackCache('updatePrice', memoryCache)
+metrics.trackCache('catalog', memoryCache)
 
 // This is the configuration for clients available in `ctx.clients`.
 const clients: ClientsConfig<Clients> = {
@@ -23,11 +23,15 @@ const clients: ClientsConfig<Clients> = {
     default: {
       retries: 2,
       timeout: TIMEOUT_MS,
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        Accept: 'application/json',
+      },
     },
     // This key will be merged with the default options and add this cache to our client.
-    updateInventory: {
+    catalog: {
       memoryCache,
-    }
+    },
   },
 }
 
@@ -37,6 +41,7 @@ declare global {
 
   interface State extends RecorderState {
     skuId: string
+    customHeaders: CustomHeaders
   }
 }
 
@@ -46,6 +51,6 @@ export default new Service({
   routes: {
     updatePrice: method({
       PUT: [auth, getSkuId, updatePrice],
-    })
+    }),
   },
 })

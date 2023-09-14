@@ -3,7 +3,7 @@
   "compilerOptions": {
     "noEmitOnError": false,
     "lib": ["dom"],
-    "module": "esnext",
+    "module": "commonjs",
     "moduleResolution": "node",
     "target": "es2019"
   },
