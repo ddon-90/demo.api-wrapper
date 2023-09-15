@@ -1,10 +1,14 @@
 import type { ClientsConfig, ServiceContext, RecorderState } from '@vtex/api'
-import { LRUCache, method, Service } from '@vtex/api'
+import { 
+  LRUCache,
+   method, Service } from '@vtex/api'
 
 import { Clients } from './clients'
 import { auth } from './middlewares/auth'
 import { getSkuId } from './middlewares/getSkuId'
 import { updatePrice } from './middlewares/updatePrice'
+import { updateInventory } from './middlewares/updateInventory'
+
 
 const TIMEOUT_MS = 30000
 
@@ -52,5 +56,8 @@ export default new Service({
     updatePrice: method({
       PUT: [auth, getSkuId, updatePrice],
     }),
+    updateInventory: method({
+      PUT: [auth, getSkuId, updateInventory],
+    })
   },
 })

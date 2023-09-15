@@ -9,6 +9,10 @@
     "updatePrice": {
       "path": "/_v/api/pricing/prices/:refId",
       "public": true
+    },
+    "updateInventory": {
+      "path": "/_v/api/inventory/skus/:refId/warehouses/:warehouseId",
+      "public": true
     }
   }
 }
