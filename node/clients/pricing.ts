@@ -1,7 +1,7 @@
 import type { InstanceOptions, IOContext } from '@vtex/api'
 import { ExternalClient } from '@vtex/api'
 
-import type { RequestPayload } from '../types'
+import type { RequestPayloadPrice } from '../types'
 
 export default class Pricing extends ExternalClient {
   constructor(context: IOContext, options?: InstanceOptions) {
@@ -16,7 +16,7 @@ export default class Pricing extends ExternalClient {
 
   public async createOrUpdateBasePriceOrFixedPrices(
     skuId: string,
-    payload: RequestPayload,
+    payload: RequestPayloadPrice,
     headers: CustomHeaders
   ): Promise<any> {
     return this.http.put(`prices/${skuId}`, payload, {

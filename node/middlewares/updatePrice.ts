@@ -1,6 +1,6 @@
 import { json } from 'co-body'
 
-import type { RequestPayload } from '../types'
+import type { RequestPayloadPrice } from '../types'
 
 export async function updatePrice(ctx: Context, next: () => Promise<void>) {
   const {
@@ -13,7 +13,7 @@ export async function updatePrice(ctx: Context, next: () => Promise<void>) {
   const { refId } = params
   const { skuId, customHeaders } = ctx.state
 
-  const payload: RequestPayload = await json(ctx.req)
+  const payload: RequestPayloadPrice = await json(ctx.req)
 
   try {
     // Update the SKU inventory

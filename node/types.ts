@@ -9,10 +9,16 @@ export interface FixedPrice {
   listPrice?: number
 }
 
-export interface RequestPayload {
+export interface RequestPayloadPrice {
   markup?: number
   listPrice?: number
   costPrice?: number
   basePrice?: number
   fixedPrices?: FixedPrice[]
+}
+
+export interface RequestPayloadLogistics {
+  unlimitedQuantity: boolean
+  dateUtcOnBalanceSystem: string,
+  quantity: number,
 }

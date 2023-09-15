@@ -1,9 +1,9 @@
 {
-  "name": "update-price-api-wrapper",
-  "vendor": "{{account}}",
+  "name": "update-inventory-price-api-wrapper",
+  "vendor": "bshapac",
   "version": "0.0.1",
-  "title": "API Example",
-  "description": "Example of new REST APIs built on top of VTEX IO.",
+  "title": "Update product wrapper",
+  "description": "Update inventory and price with refid.",
   "mustUpdateAt": "2018-01-04",
   "categories": [],
   "dependencies": {},
