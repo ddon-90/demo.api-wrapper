@@ -15,7 +15,6 @@ export class Clients extends IOClients {
     return this.getOrSet('pricing', Pricing)
   }
 
-
   public get logistics() {
     return this.getOrSet('logistics', Logistics)
   }

@@ -1,9 +1,9 @@
 {
-  "name": "update-inventory-price-api-wrapper",
-  "vendor": "bshapac",
+  "name": "api-wrapper",
+  "vendor": "{{account}}",
   "version": "0.0.1",
-  "title": "Update product wrapper",
-  "description": "Update inventory and price with refid.",
+  "title": "Update Inventory and Price by RefId",
+  "description": "Custom API wrappers to allow inventory and price updates using the SKU RefId",
   "mustUpdateAt": "2018-01-04",
   "categories": [],
   "dependencies": {},

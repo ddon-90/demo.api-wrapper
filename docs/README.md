@@ -1,8 +1,8 @@
 ## Name:
-API Extension Example
+Update Inventory and Price by RefId
 
 ## Description:
-Example of new REST APIs built on top of VTEX IO.
+Custom API wrappers to allow inventory and price updates using the SKU RefId.
 
 Exposed routes:
 ```
@@ -10,15 +10,15 @@ Exposed routes:
   "updatePrice": {
     "path": "/_v/api/pricing/prices/:refId",
     "public": true
+  },
+  "updateInventory": {
+    "path": "/_v/api/inventory/skus/:refId/warehouses/:warehouseId",
+    "public": true
   }
 }
 ```
 
-_Note: The behaviour of this API is the same as the [Create or Update Base Price or Fixed Prices](https://developers.vtex.com/docs/api-reference/pricing-api#put-/pricing/prices/-itemId-?endpoint=put-/pricing/prices/-itemId-) with the only difference that you need to use the SKU Reference ID instead of the SKU ID_
-
-## Proof points:
-- External API calls
-- Build new REST APIs
+_Note: The behaviour of these APIs is the same as the [Create or Update Base Price or Fixed Prices](https://developers.vtex.com/docs/api-reference/pricing-api#put-/pricing/prices/-itemId-?endpoint=put-/pricing/prices/-itemId-) and [Update inventory by SKU and warehouse API](https://developers.vtex.com/docs/api-reference/logistics-api#put-/api/logistics/pvt/inventory/skus/-skuId-/warehouses/-warehouseId-) with the only difference that you need to use the SKU Reference ID instead of the SKU ID_
 
 ## How to demo:
 
@@ -40,7 +40,7 @@ vtex use {{workspace}}
 
 ```
 {
-  "name": "update-price-api-wrapper",
+  "name": "api-wrapper",
   "vendor": "{{account}}",
   "version": "0.0.1",
   "title": "API Example",
@@ -58,6 +58,8 @@ vtex link
 ```
 
 6. After the linking, open Postman and make some API calls
+
+#### Update Price
 
 ```
 PUT
@@ -81,5 +83,19 @@ Request Body:
       }
     }
   ]
+}
+```
+
+#### Update Inventory
+
+```
+PUT
+https://{{workspace}}--{{account}}.myvtex.com/_v/api/inventory/skus/:refId/warehouses/:warehouseId
+
+Request Body:
+{
+  "unlimitedQuantity": false,
+  "dateUtcOnBalanceSystem": "null",
+  "quantity": 106
 }
 ```

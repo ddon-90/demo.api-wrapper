@@ -16,8 +16,12 @@ export default class Logistics extends JanusClient {
     )
   }
 
-  public async updateInventoryBySkuAndWarehouse(skuId: string, warehouseId: string, payload: RequestPayloadLogistics, headers: CustomHeaders): Promise<any> {
-
+  public async updateInventoryBySkuAndWarehouse(
+    skuId: string,
+    warehouseId: string,
+    payload: RequestPayloadLogistics,
+    headers: CustomHeaders
+  ): Promise<any> {
     return this.http.put(`api/logistics/pvt/inventory/skus/${skuId}/warehouses/${warehouseId}`, payload, {
       headers,
       metric: 'update-inventory-by-sku-and-warehouse',
