@@ -8,6 +8,7 @@ import { auth } from './middlewares/auth'
 import { getSkuId } from './middlewares/getSkuId'
 import { updatePrice } from './middlewares/updatePrice'
 import { updateInventory } from './middlewares/updateInventory'
+import { keepAlive } from './middlewares/keepAlive'
 
 
 const TIMEOUT_MS = 30000
@@ -58,6 +59,10 @@ export default new Service({
     }),
     updateInventory: method({
       PUT: [auth, getSkuId, updateInventory],
-    })
+    }),
+    keepAlive: method({
+      GET: [keepAlive],
+      POST: [keepAlive]
+    }),
   },
 })

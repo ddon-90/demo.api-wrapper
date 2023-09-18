@@ -1,6 +1,6 @@
 {
   "memory": 256,
-  "ttl": 10,
+  "ttl": 60,
   "timeout": 30,
   "minReplicas": 2,
   "maxReplicas": 4,
@@ -12,6 +12,10 @@
     },
     "updateInventory": {
       "path": "/_v/api/inventory/skus/:refId/warehouses/:warehouseId",
+      "public": true
+    },
+    "keepAlive": {
+      "path": "/_v/api/keep-alive",
       "public": true
     }
   }
